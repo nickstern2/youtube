@@ -1,6 +1,8 @@
 import axios from 'axios';
+require('dotenv').config()
 
-const KEY = 'AIzaSyA1N5igw3_AMGpE8q8uM5GGPgIDYW2f2uc';
+
+const REACT_APP_YOUTUBE_KEY = process.env.REACT_APP_YOUTUBE_KEY
 
 export default axios.create({
   baseURL: 'https://www.googleapis.com/youtube/v3',
@@ -9,7 +11,7 @@ export default axios.create({
     part: 'snippet',
     type: 'video',
     maxResults: 5,
-    key: `${KEY}`
+    key: `${REACT_APP_YOUTUBE_KEY}`
   }
 });
 
