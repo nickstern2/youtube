@@ -11,7 +11,7 @@ const App = () => {
     selectedVideo: null,
   });
 
-  const onTermSubmit = async (term) => {
+  const onTermSubmit = async (term: string) => {
     // import youtube api
     const response = await youtube.get("/search", {
       params: {
@@ -25,7 +25,7 @@ const App = () => {
     });
   };
 
-  const onVideoSelect = (video) => {
+  const onVideoSelect = (video: any) => {
     setVideoState((prevState) => ({
       ...prevState,
       selectedVideo: video,
