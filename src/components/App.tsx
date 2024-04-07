@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
-import SearchBar from "./SearchBar";
+import { SearchBar } from "./SearchBar";
 import youtube from "../api/youtube";
 import VideoList from "./VideoList";
 import VideoDetail from "./VideoDetail";
+import { Grid, Stack } from "@mui/material";
 
 const App = () => {
   const [videoState, setVideoState] = useState({
@@ -33,22 +34,17 @@ const App = () => {
   };
 
   return (
-    <div className='ui container'>
+    <Stack paddingX={10}>
       <SearchBar onFormSubmit={onTermSubmit} />
-      <div className='ui grid'>
-        <div className='ui row'>
-          <div className='col-12 col-md-7 col-lg-8 eleven wide column'>
-            <VideoDetail video={videoState.selectedVideo} />
-          </div>
-          <div className='ui col-12 col-md-5 col-lg-4 five wide column mt-4'>
-            <VideoList
-              onVideoSelect={onVideoSelect}
-              videos={videoState.videos}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={7} lg={8}>
+          <VideoDetail video={videoState.selectedVideo} />
+        </Grid>
+        <Grid item xs={12} md={5} lg={4} sx={{ mt: 4 }}>
+          <VideoList onVideoSelect={onVideoSelect} videos={videoState.videos} />
+        </Grid>
+      </Grid>
+    </Stack>
   );
 };
 export default App;
