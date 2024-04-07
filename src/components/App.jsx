@@ -1,53 +1,54 @@
-import React from 'react';
+import React, { useState } from "react";
 
-import SearchBar from './SearchBar';
-import youtube from '../api/youtube';
-import VideoList from './VideoList';
-import VideoDetail from './VideoDetail';
+import SearchBar from "./SearchBar";
+import youtube from "../api/youtube";
+import VideoList from "./VideoList";
+import VideoDetail from "./VideoDetail";
 
-class App extends React.Component {
+const App = () => {
+  const [videoState, setVideoState] = useState({
+    videos: [],
+    selectedVideo: null,
+  });
 
-  state = { videos: [], selectedVideo: null }
-
-  componentDidMount() {
-    this.onTermSubmit('React Course');
-  };
-
-  onTermSubmit = async (term) => {
+  const onTermSubmit = async (term) => {
     // import youtube api
-    const response = await youtube.get('/search', {
+    const response = await youtube.get("/search", {
       params: {
-        q: term
-      }
+        q: term,
+      },
     });
 
-    this.setState({
+    setVideoState({
       videos: response.data.items,
-      selectedVideo: response.data.items[0]
-    })
+      selectedVideo: response.data.items[0],
+    });
   };
 
-  onVideoSelect = (video) => {
-    this.setState({ selectedVideo: video });
+  const onVideoSelect = (video) => {
+    setVideoState((prevState) => ({
+      ...prevState,
+      selectedVideo: video,
+    }));
   };
 
-  render() {
-    return(
-      <div className="ui container">
-        <SearchBar onFormSubmit={this.onTermSubmit} />
-        <div className="ui grid">
-          <div className="ui row">
-          <div className="col-12 col-md-7 col-lg-8 eleven wide column">
-            <VideoDetail video={this.state.selectedVideo} />
+  return (
+    <div className='ui container'>
+      <SearchBar onFormSubmit={onTermSubmit} />
+      <div className='ui grid'>
+        <div className='ui row'>
+          <div className='col-12 col-md-7 col-lg-8 eleven wide column'>
+            <VideoDetail video={videoState.selectedVideo} />
           </div>
-          <div className="ui col-12 col-md-5 col-lg-4 five wide column mt-4">
-            <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos} />
-          </div>
+          <div className='ui col-12 col-md-5 col-lg-4 five wide column mt-4'>
+            <VideoList
+              onVideoSelect={onVideoSelect}
+              videos={videoState.videos}
+            />
           </div>
         </div>
       </div>
-    );
-  }
-}
-
+    </div>
+  );
+};
 export default App;
