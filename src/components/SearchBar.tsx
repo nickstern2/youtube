@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 
-const SearchBar = ({ onFormSubmit }) => {
+type SearchBarProps = {
+  onFormSubmit: (term: string) => Promise<void>;
+};
+const SearchBar: FC<SearchBarProps> = ({ onFormSubmit }) => {
   const [term, setTerm] = useState("");
 
-  const onInputChange = (event) => {
-    // console.log(event.target.value);
+  const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTerm(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onFormSubmit(term);
   };
