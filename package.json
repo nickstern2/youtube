@@ -13,7 +13,6 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.18.1",
     "dotenv": "^8.2.0",
-    "gh-pages": "^2.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.2",
@@ -21,7 +20,7 @@
   },
   "scripts": {
     "predeploy": "npm run build && rm -rf docs && mv build docs",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d docs",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -45,6 +44,7 @@
   "devDependencies": {
     "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.24",
+    "gh-pages": "^6.1.1",
     "typescript": "^3.9.10"
   }
 }
