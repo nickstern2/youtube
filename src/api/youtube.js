@@ -1,5 +1,4 @@
 import axios from 'axios';
-require('dotenv').config()
 
 
 const REACT_APP_YOUTUBE_KEY = process.env.REACT_APP_YOUTUBE_KEY
